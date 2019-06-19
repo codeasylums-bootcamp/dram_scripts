@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!--===============================
+=            Hero Area            =
+================================-->
+{% block body %}
+<section id="landingPage" class="hero-area bg-1 text-center overly">
+	<!-- Container Start -->
+	<!-- <div id="particles-js"></div> -->
+	
+	<div class="content">
+		<div id="large-header" class="large-header">
+			<canvas id="demo-canvas"></canvas>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Header Contetnt -->
+				<div class="content-block">
+						<h1>Be Your own team</h1>
+					<p>Want a team to practice your script? <br>No more now<br>Join us and be your own team </p>
+					<div class="short-popular-category-list text-center">
+						<h2></h2>
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<a href="category.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Self-reliant</a></li>
+							<li class="list-inline-item">
+								<a href="category.html"><i class="fa fa-users" aria-hidden="true"></i> One-man show</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="category.html"><i class="fa fa-paw" aria-hidden="true"></i> Lone-Warrior</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="category.html"><i class="fa fa-handshake-o" aria-hidden="true"></i> Handy</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="category.html"><i class="fa fa-video-camera" aria-hidden="true"></i> Actor</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+
+<!--============================
+=            Footer            =
+=============================-->
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="js/script.js"></script>
+<script src="js/Particle.js"></script>
+{% endblock script %}
