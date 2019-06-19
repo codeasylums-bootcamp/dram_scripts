@@ -19,6 +19,7 @@ from .views import *
 
 urlpatterns = [
     path('', home, name="home"),
+    path('index/', landing_page, name="landing_page"),
     path('accounts/signup/', signup, name="signup"),
     path('contact/', contact_us, name="contact_us"),
     path('upload_script/', upload_script, name="upload_script"),
@@ -32,3 +33,4 @@ urlpatterns = [
     path('set_audio/<int:pk>/', set_audio, name="set_audio"),
     path('send_audio/<int:pk>/', return_audio_view, name="return_audio_view"),
 ]
+

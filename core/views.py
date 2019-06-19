@@ -44,9 +44,10 @@ from core.models import TrainedModel
 # mwa.close()
 
 text_to_speech = TextToSpeechV1(
-    iam_apikey='Ao1fYL9rUFmyeqUnH-OA5JDLSN2v1ujEi3rBHKomeJ9-',
+    iam_apikey='Hgvj7pBH6CUuJ9ry3wFthFqK77Ufm-PowPHXg1rmfl2N',
     url='https://gateway-lon.watsonplatform.net/text-to-speech/api'
 )
+
 
 # def new_predict(sample_text):
 #     # Encode samples
@@ -227,11 +228,14 @@ def generate_script(request, pk):
 
     return redirect('home')
 
-
 @login_required
 def view_all_scripts(request, pk):
     datas = Script.objects.filter(script_id=pk)
     return render(request, 'new_view_all_script.html', {'datas': datas})
+
+
+def landing_page(request):
+    return render(request, 'index_new.html')
 
 
 def about_us(request):
@@ -255,7 +259,8 @@ def who_are_you(request, pk):
 @login_required
 def start_script(request, pk, ch):
     datas = Script.objects.filter(script_id=pk)
-    return render(request, 'start_script.html', {'datas': datas, 'ch': ch})
+    url = 'https://www.codeblogs.ga/send_script_data/{}/{}/'.format(pk,ch)
+    return render(request, 'practice_script.html', {'datas': datas, 'ch': ch, 'url':url, 'pk':pk})
 
 
 def send_script_data(request, pk, ch):
@@ -304,46 +309,79 @@ def Voice_Box(text_input, emotion, gender):
     # print(text_input, emotion, gender)
     text = ""
     if gender == 'male':
-        if emotion == 'anger':
-            x = '<voice-transformation type="Custom" rate="30%" breathiness="100%">{}</voice-transformation>'
+        text = ""
+        if emotion == 'angry' or emotion == 'anger':
+            # x = '<voice-transformation type="Custom" rate="60%" breathiness="100%">{}</voice-transformation>'
+            x = '<voice-transformation type="Custom" glottal_tension="100%" breathiness="99%" pitch="70%" pitch_range="70%" timbre="Sunrise" rate="30%" hoarseness="99%" growl="99%">{}</voice-transformation>'
             y = text_input
             text = x.format(y)
 
-        elif emotion == 'love' or emotion == 'joy':
+        elif emotion == 'happy' or emotion == 'joy' or emotion == 'surprise' or emotion == 'love' or emotion == 'surprise':
             x = '<voice-transformation type="Custom" rate="-20%" pitch_range="100%" breathiness="100%" pitch="100%">{} </voice-transformation>'
             y = text_input
             text = x.format(y)
 
-        elif emotion == 'sadness' or emotion == 'fear':
+        elif emotion == 'sadness':
             x = '<voice-transformation type="Custom"  pitch="80%"  rate="-70%" breathiness="100%">{}</voice-transformation>'
             y = text_input
             text = x.format(y)
+        elif emotion == 'fear':
+
+            x = '<voice-transformation type="Custom" glottal_tension="-99%"  pitch_range="5%"  rate="10%">{}</voice-transformation>'
+            y = text_input
+            text = x.format(y)
+
         else:
             text = text_input
+
+    #         with open('hello_world.mp3', 'wb') as audio_file:
+    #             audio_file.write(
+    #                 text_to_speech.synthesize(
+    #                     text,
+    #                     voice='en-US_MichaelVoice',
+    #                     accept='audio/mp3'
+    #                 ).get_result().content)
+
+    #         os.system("mpg321 hello_world.mp3")
 
     elif gender == 'female':
-        if emotion == 'love' or emotion == 'joy':
-            x = '<speak><express-as type=\"GoodNews\">{}</express-as></speak>'
+        text = ""
+        if emotion == 'happy' or emotion == 'joy' or emotion == 'excitement' or emotion == 'love' or emotion == 'surprise':
+            # x='<voice-transformation type="Custom" glottal_tension="-100%" pitch_range="100%" rate="50%"><express-as type="Good-News" >{}</express-as></voice-transformation>'
+
+            x = '<express-as type="GoodNews">{}</express-as>'
             y = text_input
             text = x.format(y)
 
-        elif emotion == 'sadness':
-            x = '<speak><express-as type=\"Apology\">{}</express-as></speak>'
+        elif emotion == 'apology' or emotion == 'sadness':
+            x = '<express-as type="Apology">{}</express-as>'
             y = text_input
             text = x.format(y)
 
-        elif emotion == 'fear':
-            x = '<speak><express-as type=\"Uncertainty\">{}</express-as></speak>'
+        elif emotion == 'uncertainty' or emotion == 'fear':
+            x = '<voice-transformation type="Custom" glottal_tension="-100%" pitch_range="-20%" tremble ="10%" rate="15%" breathiness="100%">{}</voice-transformation>'
+
+            # x = '<express-as type="Uncertainty">{}</express-as>'
             y = text_input
             text = x.format(y)
 
-        elif emotion == 'anger':
-            x = '<voice-transformation type="Custom" glottal_tension="100%" breathiness="0%" pitch="67%" pitch_range="0%" timbre_extent="100%" rate="38%" hoarseness="0%" growl="0%" tremble="0%" timbre="map{400_522.5_1200_1200.0_3000_3000.0_4000_4000}"><express-as type="Excitement" level="74%"> {} </express-as></voice-transformation>'
+        elif emotion == 'angry' or emotion == 'anger':
+            x = '<voice-transformation type="Custom" glottal_tension="100%" breathiness="-30%" pitch="45%" pitch_range="90%" timbre="Sunrise" rate="60%" hoarseness="0%" growl="0%">{}</voice-transformation>'
+
             y = text_input
             text = x.format(y)
         else:
             text = text_input
 
+    #         with open('hello_world.mp3', 'wb') as audio_file:
+    #             audio_file.write(
+    #                 text_to_speech.synthesize(
+    #                     text,
+    #                     voice='en-US_AllisonVoice',
+    #                     accept='audio/mp3'
+    #                 ).get_result().content)
+
+    #         os.system("mpg321 hello_world.mp3")
     return text
 
 

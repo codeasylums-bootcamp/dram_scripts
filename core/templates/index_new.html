@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+
 <!--===============================
 =            Hero Area            =
 ================================-->
@@ -55,7 +56,10 @@
 {% endblock %}
 
 {% block script %}
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script src="js/script.js"></script>
-<script src="js/Particle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.js"></script>
+{#<script src="{% static 'core/js/script.js' %}"></script>#}
+<script src="{% static 'core/js/Particle.js' %}"></script>
+
+
 {% endblock script %}
